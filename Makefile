@@ -1,13 +1,8 @@
-all:
-	mkdir -p ebin
-	cp src/gm.app.src ebin/gm.app
-	erlc -pa . -o ebin/ src/*.erl
+PROJECT = gm
 
-test:
-	erlc -DTEST -pa . -o ebin/ src/*.erl
-	erl -pa ebin/ -eval 'eunit:test(gm), init:stop().'
+ERLC_OPTS = +debug_info +warn_export_all +warn_export_vars +warn_shadow_vars +warn_obsolete_guard
 
-console:
-	erl -pa ebin/
+PLT_APPS = hipe sasl mnesia crypto compiler syntax_tools
+DIALYZER_OPTS = -Werror_handling -Wrace_conditions -Wunmatched_returns | fgrep -v -f ./dialyzer.ignore-warning
 
-full: all test
+include erlang.mk
