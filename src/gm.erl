@@ -25,7 +25,7 @@
 %% Which returns a list of characteristics to be retrived with proplists:get_value
 %%
 identify_explicit(File, Options) ->
-  Template = "identify -format :format_string :file",
+  Template = "gm identify -format :format_string :file",
   TemplateOpts = [{file, File}, {format_string, identify_format_string(Options)}],
   Result = os:cmd(bind_data(Template, TemplateOpts, [escape])),
   case cmd_error(Result) of
@@ -152,7 +152,7 @@ parse_error(Cmd, [{ErrorDescription, Error}|Errors]) ->
     _ ->
       parse_error(Cmd, Errors)
   end.
-    
+
 %% Return ok if successful, otherwise return a useful error
 parse_result(Result) ->
   case cmd_error(Result) of
