@@ -61,6 +61,8 @@ opt({interlace, Interlace}) ->
   {"-interlace", ":interlace", [{interlace, Interlace}]};
 opt({format, Format}) ->
   {"-format", ":format", [{format, Format}]};
+opt({'+profile', Profile}) ->
+  {"+profile", Profile};
 opt(adjoin) ->
   {"-adjoin"};
 opt('+adjoin') ->
